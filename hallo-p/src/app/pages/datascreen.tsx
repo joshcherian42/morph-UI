@@ -89,7 +89,7 @@ export default function Datascreen() {
                         dataPoints={[...values, ...Array(extraDays).fill(null)]}
                     />
                     <div className="text-xs mt-3 pt-1 text-slate-400 border-t">
-                        Last Fitbit Sync 12/12/2024 10:21:08 PM
+                        Last Scale Sync 12/12/2024 10:21:08 PM
                     </div>
                 </div>
                 <div className="flex justify-between mt-7">
@@ -123,7 +123,7 @@ export default function Datascreen() {
                         setCurrentDate={setCurrentDate}
                     />
                     <div className="text-xs mt-3 pt-1 text-slate-400 border-t">
-                        Last Scale Sync 12/12/2024 10:21:08 PM
+                        Last Fitbit Sync 12/12/2024 10:21:08 PM
                     </div>
                 </div>
             </div>

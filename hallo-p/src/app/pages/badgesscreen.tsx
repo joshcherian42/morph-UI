@@ -33,7 +33,7 @@ export default function Badgesscreen() {
                                 </div>
                                 <div className="pt-2 text-center">Midday</div>
                             </div>
-                            <div className="w-fit mb-3 p-4 pb-2">
+                            <div className="w-fit mb-3 p-4 pb-2  opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconSunset color="white" size={34} />
                                 </div>
@@ -95,7 +95,7 @@ export default function Badgesscreen() {
                                     Daily Activity Goal 25 days
                                 </div>
                             </div>
-                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center">
+                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconWalk color="white" size={34} />
                                 </div>
@@ -103,7 +103,7 @@ export default function Badgesscreen() {
                                     Daily Activity Goal 50 days
                                 </div>
                             </div>
-                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center">
+                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center  opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconWalk color="white" size={34} />
                                 </div>
@@ -127,7 +127,7 @@ export default function Badgesscreen() {
                                     Weight loss 10 lbs
                                 </div>
                             </div>
-                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center">
+                            <div className="w-fit mb-3 p-4 pb-2 flex flex-col items-center opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconScaleOutline color="white" size={34} />
                                 </div>
