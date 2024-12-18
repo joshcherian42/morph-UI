@@ -68,7 +68,7 @@ export default function Messagesscreen() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="border-2 border-slate-300 p-2 pl-4 rounded-full w-full text-slate-300">
+                            <div className="border-2 border-slate-300 p-2 pl-4 rounded-full w-full text-slate-300 cursor-text">
                                 Send Message
                             </div>
                         </div>
