@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LineChart from "../components/LineChart";
 import BarChart from "../components/BarChart";
-import { format, addDays } from "date-fns";
+import { format, subDays, addDays } from "date-fns";
 import {
     IconScaleOutline,
     IconChevronDown,
@@ -26,7 +26,8 @@ export default function Datascreen() {
         { length: values.length + extraDays },
         (_, i) => format(addDays(startDate, i), "MMM d"),
     );
-    const [dataDate, setDataDate] = useState<Date | null>(new Date());
+
+    const [currentDate, setCurrentDate] = useState<Date>(new Date());
     return (
         <div className="rounded-t-3xl h-[90%]">
             {/*<div className="h-[10%]"></div>
@@ -94,16 +95,33 @@ export default function Datascreen() {
                 <div className="flex justify-between mt-7">
                     <div className="text-3xl pb-4 ">Steps</div>
                     <div className="flex items-center">
-                        <IconChevronLeft className="cursor-pointer" />
-                        <DatePickerInput
-                            value={dataDate}
-                            onChange={setDataDate}
+                        <IconChevronLeft
+                            className="cursor-pointer"
+                            onClick={() =>
+                                setCurrentDate((prevDate) =>
+                                    subDays(prevDate, 1),
+                                )
+                            }
                         />
-                        <IconChevronRight className="cursor-pointer" />
+                        <DatePickerInput
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                        />
+                        <IconChevronRight
+                            className="cursor-pointer"
+                            onClick={() =>
+                                setCurrentDate((prevDate) =>
+                                    addDays(prevDate, 1),
+                                )
+                            }
+                        />
                     </div>
                 </div>
                 <div className="w-full bg-slate-50 rounded-xl p-4 mb-7">
-                    <BarChart />
+                    <BarChart
+                        currentDate={currentDate}
+                        setCurrentDate={setCurrentDate}
+                    />
                     <div className="text-xs mt-3 pt-1 text-slate-400 border-t">
                         Last Scale Sync 12/12/2024 10:21:08 PM
                     </div>

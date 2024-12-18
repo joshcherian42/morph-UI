@@ -13,9 +13,13 @@ import zoomPlugin from "chartjs-plugin-zoom";
 import { registerChartJs } from "../utils/chartJsConfig";
 import { addDays, subDays, format } from "date-fns";
 
-const BarChart = () => {
+interface Props {
+  currentDate: Date;
+  setCurrentDate: Function;
+}
+
+const BarChart = ({ currentDate, setCurrentDate }: Props) => {
   const chartRef = useRef(null);
-  const [currentDate, setCurrentDate] = useState(new Date());
 
   const [visibleRange, setVisibleRange] = useState({
     startDate: subDays(new Date(), 3),
@@ -53,6 +57,31 @@ const BarChart = () => {
     );
     setChartReady(true); // Indicate registration is complete
   }, []);
+
+  useEffect(() => {
+    // Ensure the visible range updates when the currentDate changes
+    const newStartDate = subDays(currentDate, 3);
+    const newEndDate = addDays(currentDate, 3);
+
+    setVisibleRange({
+      startDate: newStartDate,
+      endDate: newEndDate,
+    });
+
+    // Center chart on `currentDate`
+    if (chartRef.current) {
+      const chart = chartRef.current;
+      const xScale = chart.scales.x;
+
+      xScale.min = labels.findIndex(
+        (date) => date === format(newStartDate, "yyyy-MM-dd"),
+      );
+      xScale.max = labels.findIndex(
+        (date) => date === format(newEndDate, "yyyy-MM-dd"),
+      );
+      chart.update();
+    }
+  }, [currentDate]);
 
   const createLabelsForRange = (start, end) => {
     const labels = [];
@@ -132,7 +161,7 @@ const BarChart = () => {
             setVisibleRange({ startDate: newStartDate, endDate: newEndDate });
 
             const middleIndex = Math.floor((minIndex + maxIndex) / 2);
-            setCurrentDate(labels[middleIndex]);
+            setCurrentDate(new Date(labels[middleIndex]));
           },
         },
       },
