@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mantine-ActionIcon-icon {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.mantine-DateInput-input {
+  width: 150px !important;
+}
+
+.clip-arc {
+  clip-path: path("M 0,20 Q 50%,-20 100%,20 L 100%,80 Q 50%,120 0,80 Z");
+}
+
+.mantine-DatePickerInput-input {
+  border: none !important;
+}
