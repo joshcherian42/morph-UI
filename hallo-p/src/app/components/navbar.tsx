@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { ActionIcon } from "@mantine/core";
 import {
     IconHome,
@@ -10,7 +9,7 @@ import {
 
 interface Props {
     page: string;
-    setPage: Function;
+    setPage: (page: string) => void;
 }
 
 export default function NavBar({ page, setPage }: Props) {
@@ -43,7 +42,6 @@ export default function NavBar({ page, setPage }: Props) {
                     size="xl"
                     className="h-full"
                     onClick={() => {
-                        console.log("ummm");
                         setPage("data");
                     }}
                 >

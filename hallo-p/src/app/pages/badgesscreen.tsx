@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     IconSun,
     IconSunrise,
@@ -6,7 +5,6 @@ import {
     IconWalk,
     IconScaleOutline,
 } from "@tabler/icons-react";
-import { Paper } from "@mantine/core";
 
 export default function Badgesscreen() {
     return (
@@ -16,12 +14,12 @@ export default function Badgesscreen() {
                 <div className="overflow-y-auto h-[90%]">
                     <div>
                         <div className="text-xl mb-4 border-b border-b-slate-100">
-                            Daily Achievements
+                            Daily Badges
                         </div>
 
                         {/*Row*/}
                         <div className="px-4 flex flex-wrap justify-between">
-                            <div className="w-fit mb-3 p-4 pb-2">
+                            <div className="w-fit mb-3 p-4 pb-2 opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconSunrise color="white" size={34} />
                                 </div>
@@ -33,7 +31,7 @@ export default function Badgesscreen() {
                                 </div>
                                 <div className="pt-2 text-center">Midday</div>
                             </div>
-                            <div className="w-fit mb-3 p-4 pb-2  opacity-50">
+                            <div className="w-fit mb-3 p-4 pb-2 opacity-50">
                                 <div className=" w-24 h-24 rounded-full bg-[#ccd5ae] flex items-center justify-center">
                                     <IconSunset color="white" size={34} />
                                 </div>
@@ -82,7 +80,7 @@ export default function Badgesscreen() {
 
                     <div>
                         <div className="text-xl mb-2 border-b border-b-slate-100">
-                            Long Term Achievements
+                            Long Term Badges
                         </div>
 
                         {/*Row*/}

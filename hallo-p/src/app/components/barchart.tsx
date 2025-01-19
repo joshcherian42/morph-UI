@@ -7,26 +7,29 @@ import {
   BarElement,
   Title,
   Tooltip,
+  ChartOptions,
   Legend,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
-import { registerChartJs } from "../utils/chartJsConfig";
 import { addDays, subDays, format } from "date-fns";
 
 interface Props {
   currentDate: Date;
-  setCurrentDate: Function;
+  setCurrentDate: (date: Date) => void;
 }
 
 const BarChart = ({ currentDate, setCurrentDate }: Props) => {
-  const chartRef = useRef(null);
+  const chartRef = useRef<ChartJS<"bar"> | null>(null);
 
   const [visibleRange, setVisibleRange] = useState({
     startDate: subDays(new Date(), 3),
     endDate: addDays(new Date(), 3),
   });
 
-  const dataPoints = {
+  const dataPoints: Record<
+    string,
+    { morning: number; midday: number; evening: number }
+  > = {
     "2024-12-11": { morning: 60, midday: 80, evening: 55 },
     "2024-12-12": { morning: 62, midday: 82, evening: 58 },
     "2024-12-13": { morning: 65, midday: 85, evening: 62 },
@@ -58,14 +61,36 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
     setChartReady(true); // Indicate registration is complete
   }, []);
 
+  const createLabelsForRange = (start: Date, end: Date): string[] => {
+    const labels = [];
+    let current = new Date(start);
+    while (current <= end) {
+      labels.push(format(current, "yyyy-MM-dd"));
+      current = addDays(current, 1);
+    }
+    return labels;
+  };
+
+  const labels = createLabelsForRange(
+    subDays(new Date("2024-12-11"), 30),
+    addDays(new Date("2024-12-23"), 30),
+  );
+
   useEffect(() => {
-    // Ensure the visible range updates when the currentDate changes
     const newStartDate = subDays(currentDate, 3);
     const newEndDate = addDays(currentDate, 3);
 
-    setVisibleRange({
-      startDate: newStartDate,
-      endDate: newEndDate,
+    setVisibleRange((prevRange) => {
+      if (
+        prevRange.startDate.getTime() === newStartDate.getTime() &&
+        prevRange.endDate.getTime() === newEndDate.getTime()
+      ) {
+        return prevRange;
+      }
+      return {
+        startDate: newStartDate,
+        endDate: newEndDate,
+      };
     });
 
     // Center chart on `currentDate`
@@ -81,21 +106,9 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
       );
       chart.update();
     }
-  }, [currentDate]);
+  }, [currentDate, labels]);
 
-  const createLabelsForRange = (start, end) => {
-    const labels = [];
-    let current = new Date(start);
-    while (current <= end) {
-      labels.push(format(current, "yyyy-MM-dd"));
-      current = addDays(current, 1);
-    }
-    return labels;
-  };
-
-  const buildChartData = (labels, data, visibleRange) => {
-    const { startDate, endDate } = visibleRange;
-    console.log(currentDate);
+  const buildChartData = (labels: string[], data: typeof dataPoints) => {
     return {
       labels,
       datasets: [
@@ -137,12 +150,7 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
     };
   };
 
-  const labels = createLabelsForRange(
-    subDays(new Date("2024-12-11"), 30),
-    addDays(new Date("2024-12-23"), 30),
-  );
-
-  const options = {
+  const options: ChartOptions<"bar"> = {
     responsive: true,
     plugins: {
       legend: { position: "top" },
@@ -150,7 +158,7 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
         pan: {
           enabled: true,
           mode: "x",
-          onPanComplete: ({ chart }) => {
+          onPanComplete: ({ chart }: { chart: ChartJS }) => {
             const xScale = chart.scales.x;
             const minIndex = Math.round(xScale.min);
             const maxIndex = Math.round(xScale.max);
@@ -188,7 +196,7 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
   };
 
   useEffect(() => {
-    if (!chartRef.current) return;
+    if (!chartRef.current || labels.length === 0) return;
     const chart = chartRef.current;
     const xScale = chart.scales.x;
 
@@ -204,12 +212,12 @@ const BarChart = ({ currentDate, setCurrentDate }: Props) => {
     );
 
     chart.update();
-  }, [visibleRange]);
+  }, [visibleRange, labels]);
 
   return chartReady ? (
     <Bar
       ref={chartRef}
-      data={buildChartData(labels, dataPoints, visibleRange)}
+      data={buildChartData(labels, dataPoints)}
       options={options}
     />
   ) : null;

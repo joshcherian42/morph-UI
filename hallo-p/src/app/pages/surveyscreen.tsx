@@ -8,12 +8,9 @@ export default function Surveyscreen() {
     return (
         <div className="rounded-t-3xl h-[90%]">
             <div className="overflow-y-auto h-full pt-10 mx-7">
-                {/* Conditional Rendering */}
                 {showSurvey ? (
                     <div className="relative">
-                        {/* Flexbox for Centered Survey 2 */}
                         <div className="flex justify-center items-center relative">
-                            {/* Chevron Left Positioned Absolutely */}
                             <IconChevronLeft
                                 className="absolute left-0 cursor-pointer"
                                 onClick={() => setShowSurvey(false)}

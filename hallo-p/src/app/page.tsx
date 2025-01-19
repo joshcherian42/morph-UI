@@ -2,15 +2,7 @@
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import { Outfit } from "next/font/google";
-import {
-  MantineProvider,
-  Progress,
-  RingProgress,
-  Center,
-  rem,
-  ActionIcon,
-} from "@mantine/core";
-import { DateInput } from "@mantine/dates";
+import { MantineProvider } from "@mantine/core";
 import { useState } from "react";
 
 import Homescreen from "./pages/homescreen";
@@ -21,21 +13,12 @@ import Messagesscreen from "./pages/messagesscreen";
 import dynamic from "next/dynamic";
 
 import NavBar from "./components/navbar";
-import {
-  IconSun,
-  IconSunrise,
-  IconSunset,
-  IconShoe,
-  IconChevronLeft,
-  IconChevronRight,
-  IconUser,
-} from "@tabler/icons-react";
+
 const raleway = Outfit({ subsets: ["latin"] });
 const Datascreen = dynamic(() => import("./pages/datascreen"), { ssr: false });
 
 export default function Home() {
   const [page, setPage] = useState<string>("home");
-  const [dataDate, setDataDate] = useState<Date | null>(new Date());
 
   return (
     <MantineProvider>

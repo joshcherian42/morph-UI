@@ -13,7 +13,12 @@ import {
 } from "chart.js";
 import dynamic from "next/dynamic";
 
-const LineChart = ({ labels, dataPoints }) => {
+interface Props {
+  labels: string[];
+  dataPoints: (number | null)[];
+}
+
+const LineChart = ({ labels, dataPoints }: Props) => {
   const [chartReady, setChartReady] = useState(false);
 
   useEffect(() => {

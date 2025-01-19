@@ -6,7 +6,7 @@ import {
     IconLetterC,
     IconBell,
 } from "@tabler/icons-react";
-import { Button, Slider, ActionIcon } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 
 export default function Messagesscreen() {
     const [showMessage, setShowMessage] = useState<string>("");
@@ -14,12 +14,9 @@ export default function Messagesscreen() {
     return (
         <div className="rounded-t-3xl h-[90%]">
             <div className="overflow-y-auto h-full pt-10 mx-7">
-                {/* Conditional Rendering */}
                 {showMessage != "" ? (
                     <div className="relative h-[90%]">
-                        {/* Flexbox for Centered Survey 2 */}
                         <div className="flex justify-center items-center relative">
-                            {/* Chevron Left Positioned Absolutely */}
                             <IconChevronLeft
                                 className="absolute left-0 cursor-pointer"
                                 onClick={() => setShowMessage("")}

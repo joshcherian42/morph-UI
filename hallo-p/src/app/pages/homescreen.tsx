@@ -1,5 +1,4 @@
 import {
-  MantineProvider,
   Progress,
   RingProgress,
   Center,
@@ -7,20 +6,14 @@ import {
   ActionIcon,
   Tooltip,
 } from "@mantine/core";
-import { useState } from "react";
 import {
   IconSun,
   IconSunrise,
   IconSunset,
-  IconShoe,
-  IconChevronLeft,
-  IconChevronRight,
   IconUser,
 } from "@tabler/icons-react";
 
 export default function Homescreen() {
-  const [page, setPage] = useState<string>("home");
-
   return (
     <div className="overflow-y-hidden">
       {/*Top bit*/}
@@ -48,7 +41,7 @@ export default function Homescreen() {
                 </div>
               </div>
               <div className="py-6">
-                <div className="text-xl font-light">Today's Progress</div>
+                <div className="text-xl font-light">Today{`'`}s Progress</div>
                 <div className="flex items-end gap-x-2">
                   <div className="text-8xl font-light">6,823</div>
                   <div className="text-2xl">steps</div>
